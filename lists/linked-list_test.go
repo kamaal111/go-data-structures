@@ -12,12 +12,16 @@ var _ = Describe("Linked List", func() {
 		list := lists.LinkedList{}
 		for i := 0; i < 5; i += 1 {
 			list.Append(i)
+			Expect(list.Head.Value.(int)).To(Equal(0))
 			Expect(list.Tail.Value.(int)).To(Equal(i))
 		}
+
 		for i := 5; i < 10; i += 1 {
 			list.Unshift(i)
 			Expect(list.Head.Value.(int)).To(Equal(i))
+			Expect(list.Tail.Value.(int)).To(Equal(4))
 		}
+
 		Expect(list.Head.Value.(int)).To(Equal(9))
 		Expect(list.Count()).To(Equal(10))
 	})

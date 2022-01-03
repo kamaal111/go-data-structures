@@ -30,19 +30,14 @@ func (list *LinkedList) Append(value interface{}) {
 
 func (list *LinkedList) Unshift(value interface{}) {
 	node := &listNode{
-		Next:  list.Head,
 		Value: value,
 	}
 	if list.Head != nil {
-		list.Head.Previous = node
+		node.Next = list.Head
+		list.Head = node
+	} else {
+		list.Head = node
 	}
-	list.Head = node
-
-	head := list.Head
-	for head.Next != nil {
-		head = head.Next
-	}
-	list.Tail = head
 	list.count += 1
 }
 
