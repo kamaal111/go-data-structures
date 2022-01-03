@@ -10,20 +10,23 @@ type LinkedList struct {
 
 type listNode struct {
 	Value    interface{}
-	Next     *listNode
 	Previous *listNode
+	Next     *listNode
 }
 
 func (list *LinkedList) Append(value interface{}) {
 	node := &listNode{
-		Value: value,
+		Value:    value,
+		Previous: list.Tail,
 	}
+
 	if list.Tail != nil {
 		list.Tail.Next = list.Tail
 		list.Tail.Next = node
 	} else {
 		list.Head = node
 	}
+
 	list.Tail = node
 	list.count += 1
 }
@@ -32,13 +35,29 @@ func (list *LinkedList) Unshift(value interface{}) {
 	node := &listNode{
 		Value: value,
 	}
+
 	if list.Head != nil {
+		list.Head.Previous = node
 		node.Next = list.Head
 		list.Head = node
 	} else {
 		list.Head = node
 	}
+
 	list.count += 1
+}
+
+func (list *LinkedList) Shift() error {
+	if list.Head == nil {
+		return fmt.Errorf("list is empty")
+	}
+
+	head := list.Head
+	list.Head = head.Next
+	head.Next = nil
+
+	list.count -= 1
+	return nil
 }
 
 func (list *LinkedList) Count() int {
@@ -47,9 +66,10 @@ func (list *LinkedList) Count() int {
 
 func (l *LinkedList) Display() {
 	list := l.Head
+	fmt.Printf("Head -> ")
 	for list != nil {
 		fmt.Printf("%+v -> ", list.Value)
 		list = list.Next
 	}
-	fmt.Printf("Head\n")
+	fmt.Printf("Tail\n")
 }
