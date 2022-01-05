@@ -34,11 +34,13 @@ var _ = Describe("Linked List", func() {
 		}
 
 		Expect(list.Count()).To(Equal(5))
-		Expect(list.Tail.Value.(int)).To(Equal(4))
+		Expect(list.Tail.Value).To(Equal(4))
 
-		list.Shift()
+		node, err := list.Shift()
+		Expect(err).To(BeNil())
+		Expect(node.Value).To(Equal(0))
 
 		Expect(list.Count()).To(Equal(4))
-		Expect(list.Head.Value.(int)).To(Equal(1))
+		Expect(list.Head.Value).To(Equal(1))
 	})
 })
