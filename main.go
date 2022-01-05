@@ -9,14 +9,16 @@ import (
 
 func main() {
 	list := lists.LinkedList{}
-	list.Append(22)
-	list.Append(44)
-	list.Append(11)
+	list.Push(22)
+	list.Push(44)
+	list.Push(11)
 	list.Display()
-	removedNode, err := list.Shift()
+	fmt.Println(list.Count())
+	removedNode, err := list.Pop()
 	if err != nil {
 		log.Fatalln(err)
 	}
 	fmt.Println(removedNode)
 	list.Display()
+	fmt.Println(list.Count())
 }

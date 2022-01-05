@@ -14,7 +14,7 @@ type ListNode struct {
 	Next     *ListNode
 }
 
-func (list *LinkedList) Append(value interface{}) {
+func (list *LinkedList) Push(value interface{}) {
 	node := &ListNode{
 		Value:    value,
 		Previous: list.Tail,
@@ -58,6 +58,20 @@ func (list *LinkedList) Shift() (*ListNode, error) {
 
 	list.count -= 1
 	return head, nil
+}
+
+func (list *LinkedList) Pop() (*ListNode, error) {
+	if list.Head == nil {
+		return nil, fmt.Errorf("list is empty")
+	}
+
+	tail := list.Tail
+	list.Tail = tail.Previous
+	tail.Previous = nil
+	list.Tail.Next = nil
+
+	list.count -= 1
+	return tail, nil
 }
 
 func (list *LinkedList) Count() int {

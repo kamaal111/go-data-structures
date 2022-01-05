@@ -11,7 +11,7 @@ var _ = Describe("Linked List", func() {
 	It("inserts 10 nodes", func() {
 		list := lists.LinkedList{}
 		for i := 0; i < 5; i += 1 {
-			list.Append(i)
+			list.Push(i)
 			Expect(list.Head.Value.(int)).To(Equal(0))
 			Expect(list.Tail.Value.(int)).To(Equal(i))
 		}
@@ -30,7 +30,7 @@ var _ = Describe("Linked List", func() {
 		list := lists.LinkedList{}
 
 		for i := 0; i < 5; i += 1 {
-			list.Append(i)
+			list.Push(i)
 		}
 
 		Expect(list.Count()).To(Equal(5))
@@ -42,5 +42,23 @@ var _ = Describe("Linked List", func() {
 
 		Expect(list.Count()).To(Equal(4))
 		Expect(list.Head.Value).To(Equal(1))
+	})
+
+	It("removes the last node in list", func() {
+		list := lists.LinkedList{}
+
+		for i := 0; i < 5; i += 1 {
+			list.Push(i)
+		}
+
+		Expect(list.Count()).To(Equal(5))
+		Expect(list.Tail.Value).To(Equal(4))
+
+		node, err := list.Pop()
+		Expect(err).To(BeNil())
+		Expect(node.Value).To(Equal(4))
+
+		Expect(list.Count()).To(Equal(4))
+		Expect(list.Tail.Value).To(Equal(3))
 	})
 })
