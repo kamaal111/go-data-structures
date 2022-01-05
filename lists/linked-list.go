@@ -74,16 +74,34 @@ func (list *LinkedList) Pop() (*listNode, error) {
 	return tail, nil
 }
 
+func (list *LinkedList) ToSlice() []interface{} {
+	count := list.count
+	if count == 0 {
+		return []interface{}{}
+	}
+
+	array := make([]interface{}, count)
+
+	node := list.Head
+	iteration := 0
+	for node != nil {
+		array[iteration] = node.Value
+		node = node.Next
+		iteration += 1
+	}
+	return array
+}
+
 func (list *LinkedList) Count() int {
 	return list.count
 }
 
-func (l *LinkedList) Display() {
-	list := l.Head
+func (list *LinkedList) Display() {
+	node := list.Head
 	fmt.Printf("Head -> ")
-	for list != nil {
-		fmt.Printf("%+v -> ", list.Value)
-		list = list.Next
+	for node != nil {
+		fmt.Printf("%+v -> ", node.Value)
+		node = node.Next
 	}
 	fmt.Printf("Tail\n")
 }
