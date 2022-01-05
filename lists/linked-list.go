@@ -4,18 +4,18 @@ import "fmt"
 
 type LinkedList struct {
 	count int
-	Head  *ListNode
-	Tail  *ListNode
+	Head  *listNode
+	Tail  *listNode
 }
 
-type ListNode struct {
+type listNode struct {
 	Value    interface{}
-	Previous *ListNode
-	Next     *ListNode
+	Previous *listNode
+	Next     *listNode
 }
 
 func (list *LinkedList) Push(value interface{}) {
-	node := &ListNode{
+	node := &listNode{
 		Value:    value,
 		Previous: list.Tail,
 	}
@@ -32,7 +32,7 @@ func (list *LinkedList) Push(value interface{}) {
 }
 
 func (list *LinkedList) Unshift(value interface{}) {
-	node := &ListNode{
+	node := &listNode{
 		Value: value,
 	}
 
@@ -47,7 +47,7 @@ func (list *LinkedList) Unshift(value interface{}) {
 	list.count += 1
 }
 
-func (list *LinkedList) Shift() (*ListNode, error) {
+func (list *LinkedList) Shift() (*listNode, error) {
 	if list.Head == nil {
 		return nil, fmt.Errorf("list is empty")
 	}
@@ -60,7 +60,7 @@ func (list *LinkedList) Shift() (*ListNode, error) {
 	return head, nil
 }
 
-func (list *LinkedList) Pop() (*ListNode, error) {
+func (list *LinkedList) Pop() (*listNode, error) {
 	if list.Head == nil {
 		return nil, fmt.Errorf("list is empty")
 	}

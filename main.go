@@ -13,12 +13,10 @@ func main() {
 	list.Push(44)
 	list.Push(11)
 	list.Display()
-	fmt.Println(list.Count())
 	removedNode, err := list.Pop()
 	if err != nil {
 		log.Fatalln(err)
 	}
 	fmt.Println(removedNode)
 	list.Display()
-	fmt.Println(list.Count())
 }
